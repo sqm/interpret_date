@@ -24,7 +24,7 @@ Or install it yourself as:
 To utilize `interpret_date`, mix in the `InterpretDate` module into a
 class that needs to interpret American formatted dates into ruby Date
 objects and pass the date string into the `interpret_date` or
-`interpret_date_of_birth`.
+`interpret_dob_date`.
 
 Example (setting attributes for an example `ActiveRecord` model):
 
@@ -37,7 +37,7 @@ class Parcel < ActiveRecord::Base
   end
 
   def birthdate=(value)
-    super(interpret_date_of_birth(value))
+    super(interpret_dob_date(value))
   end
 end
 ```
