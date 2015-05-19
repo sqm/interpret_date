@@ -1,5 +1,8 @@
 # InterpretDate
 
+[![Build
+status](https://travis-ci.org/sqm/interpret_date.svg?branch=master)](https://travis-ci.org/sqm/interpret_date)
+
 Module to provide helper methods for interpreting American formatted date strings.
 
 ## Installation
