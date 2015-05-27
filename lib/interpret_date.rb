@@ -16,7 +16,8 @@ module InterpretDate
   private
 
   def current_century
-    "#{Date.today.to_s[0..1]}00".to_i
+    year = Date.today.year
+    "#{year.to_s[0..1]}00".to_i
   end
 
   def contains_only_six_digits(value)
