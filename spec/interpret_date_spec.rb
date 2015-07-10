@@ -10,14 +10,17 @@ RSpec.describe InterpretDate do
       "m/d/yyyy" => "2/6/1990",
       "mm/dd/yy" => "02/06/90",
       "mm/dd/yyyy" => "02/06/1990",
+      "yyyy/mm/dd" => "1990/02/06",
       "m-d-yy" => "2-6-90",
       "m-d-yyyy" => "2-6-1990",
       "mm-dd-yy" => "02-06-90",
       "mm-dd-yyyy" => "02-06-1990",
+      "yyyy-mm-dd" => "1990-02-06",
       "m.d.yy" => "2.6.90",
       "m.d.yyyy" => "2.6.1990",
       "mm.dd.yy" => "02.06.90",
       "mm.dd.yyyy" => "02.06.1990",
+      "yyyy.mm.dd" => "1990.02.06",
     }.each do |format, value|
       it "interprets dates in the form of #{format} properly" do
         expect(interpret_date(value)).to eq(test_date)
