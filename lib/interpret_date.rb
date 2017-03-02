@@ -35,6 +35,8 @@ module InterpretDate
       month = date_input[0,2].to_i
       day   = date_input[2,2].to_i
       year  = date_input[4,2].to_i
+    elsif db_formatted_date(date_input)
+      year, month, day = date_input.split("-").collect { |element| element.to_i }
     elsif slash_based_date(date_input)
       # Break the string apart using the delimiters '-', '/', and '.', making each element an integer
       month, day, year = date_input.split(/[-\.\/]+/).collect { |element| element.to_i }
@@ -75,5 +77,10 @@ module InterpretDate
   # -----------------------------------------
   def slash_based_date(value)
     /^\d{1,2}([-\.\/]+)\d{1,2}\1\d{2,4}$/ =~ value
+  end
+
+  # Example: 2017-01-01
+  def db_formatted_date(value)
+    /^\d{4}-\d{2}-\d{2}$/ =~ value
   end
 end
