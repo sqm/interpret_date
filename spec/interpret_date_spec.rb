@@ -53,6 +53,12 @@ RSpec.describe InterpretDate do
     it "returns nil if the input passed in cannot be parsed into a date" do
       expect(interpret_date("Kevin Bacon")).to eq(nil)
     end
+
+    context "when the date is a db formatted string" do
+      it "interprets the string as a date" do
+        expect(interpret_date("2017-01-01")).to eql(Date.new(2017, 01, 01))
+      end
+    end
   end
 
   describe "#interpret_dob_date" do
