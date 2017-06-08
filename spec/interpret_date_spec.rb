@@ -6,6 +6,7 @@ RSpec.describe InterpretDate do
 
     {
       "mmddyy" => "020690",
+      "mmddyyyy" => "02061990",
       "m/d/yy" => "2/6/90",
       "m/d/yyyy" => "2/6/1990",
       "mm/dd/yy" => "02/06/90",
