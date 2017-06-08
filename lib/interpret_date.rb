@@ -25,6 +25,10 @@ module InterpretDate
     /^\d{6}$/ =~ value
   end
 
+  def contains_only_eight_digits(value)
+    /^\d{8}$/ =~ value
+  end
+
   def convert_date(date_input)
     # Only run the interpret_date code if we have a non-nil string,
     # otherwise, use #to_date to strip any time or timezone info
@@ -36,6 +40,12 @@ module InterpretDate
       month = date_input[0,2].to_i
       day   = date_input[2,2].to_i
       year  = date_input[4,2].to_i
+    elsif contains_only_eight_digits(date_input)
+      # The date_input only contains digits, and must
+      # be in the form MMDDYYYY
+      month = date_input[0,2].to_i
+      day   = date_input[2,2].to_i
+      year  = date_input[4,4].to_i
     elsif db_formatted_date(date_input)
       year, month, day = date_input.split("-").collect { |element| element.to_i }
     elsif slash_based_date(date_input)
