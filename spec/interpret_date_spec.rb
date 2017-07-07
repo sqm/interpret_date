@@ -74,4 +74,32 @@ RSpec.describe InterpretDate do
       end
     end
   end
+
+  describe "#interpret_date_assignment_for" do
+    class TestBase
+      attr_reader :field1
+      def field1=(value)
+        @field1 = value - 1
+      end
+    end
+
+    class Test < TestBase
+      include InterpretDate
+      attr_accessor :field2
+      interpret_date_assignment_for :field1, :field2
+    end
+
+    let(:test_object) { Test.new }
+    let(:test_date) { "2/6/1990" }
+
+    it "creates an attribute assignment method that calls interpret_date" do
+      expect(test_object).to receive(:interpret_date).with(test_date).and_call_original.twice
+
+      test_object.field1 = test_date
+      expect(test_object.field1).to eq(Date.new(1990, 2, 5))
+
+      test_object.field2 = test_date
+      expect(test_object.field2).to eq(Date.new(1990, 2, 6))
+    end
+  end
 end
