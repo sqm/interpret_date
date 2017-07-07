@@ -2,6 +2,24 @@ require "date"
 require "interpret_date/version"
 
 module InterpretDate
+  def self.included base
+    base.extend ClassMethods
+  end
+
+  module ClassMethods
+    def interpret_date_assignment_for(*attributes)
+      attributes.map(&:to_s).each do |field|
+        define_method("#{field}=".to_sym) do |value|
+          if defined?(super)
+            super(interpret_date(value) || value)
+          else
+            instance_variable_set("@#{field}", interpret_date(value) || value)
+          end
+        end
+      end
+    end
+  end
+
   def interpret_date(date_input, buffer = 10)
     # the number of years previous turn of the century + buffer number of years
     @century_divider = Date.today.year + buffer - current_century
