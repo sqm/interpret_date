@@ -1,4 +1,5 @@
 require "date"
+require "interpret_date/date_type"
 require "interpret_date/version"
 
 module InterpretDate

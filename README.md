@@ -21,6 +21,8 @@ Or install it yourself as:
 
 ## Usage
 
+### Instance Methods
+
 To utilize `interpret_date`, mix in the `InterpretDate` module into a
 class that needs to interpret American formatted dates into ruby Date
 objects and pass the date string into the `interpret_date` or
@@ -39,6 +41,31 @@ class Parcel < ActiveRecord::Base
   def birthdate=(value)
     super(interpret_dob_date(value))
   end
+end
+```
+
+### ActiveRecord Date Type
+
+You can also utilize `InterpretDate` with the ActiveRecord Attribute
+API to automatically cast dates with their interpreted values.
+
+```ruby
+class Parcel < ActiveRecord::Base
+  attribute :shipping_date, InterpretDate::DateType.new
+end
+```
+
+If you plan on using the Date Type extensively you can register it in
+an initializer.
+
+```ruby
+# config/initializers/types.rb
+ActiveRecord::Type.register(:interpreted_date, InterpretDate::DateType)
+```
+
+```ruby
+class Parcel < ActiveRecord::Base
+  attribute :shipping_date, :interpreted_date
 end
 ```
 
